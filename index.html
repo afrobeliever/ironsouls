@@ -3,712 +3,672 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Iron Souls — Handcrafted Metal Art</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<title>Iron Souls — Handcrafted Metal Art | Stellenbosch</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
   :root {
-    --forge: #1a1209;
-    --ember: #c4611a;
-    --rust: #8b3a0f;
-    --ash: #e8e0d4;
-    --iron: #3a3530;
-    --gold: #d4a843;
-    --smoke: #2d2820;
-    --cream: #f5f0e8;
+    --iron: #1a1a1a;
+    --rust: #8B3A1A;
+    --ember: #D4500A;
+    --molten: #F07020;
+    --spark: #FFB347;
+    --ash: #C8BEB2;
+    --smoke: #3D3530;
+    --forge: #0D0A08;
+    --steel: #7A8A9A;
+    --chrome: #D0D8E0;
   }
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
   html { scroll-behavior: smooth; }
 
   body {
     background: var(--forge);
     color: var(--ash);
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Cormorant Garamond', Georgia, serif;
     overflow-x: hidden;
     cursor: none;
   }
 
   /* Custom cursor */
   .cursor {
-    position: fixed;
     width: 12px; height: 12px;
     background: var(--ember);
     border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: width 0.2s, height 0.2s, background 0.2s;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 9999;
     mix-blend-mode: screen;
+    transition: transform 0.1s;
   }
   .cursor-ring {
-    position: fixed;
     width: 36px; height: 36px;
-    border: 1px solid var(--gold);
+    border: 1px solid var(--molten);
     border-radius: 50%;
-    pointer-events: none;
-    z-index: 9998;
-    transform: translate(-50%, -50%);
-    transition: all 0.12s ease;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 9998;
+    transition: transform 0.25s, opacity 0.2s;
     opacity: 0.6;
   }
-  body:hover .cursor { opacity: 1; }
 
   /* Noise texture overlay */
   body::before {
     content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 1000;
-    opacity: 0.35;
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 1; opacity: 0.4;
   }
 
-  /* Nav */
+  /* NAV */
   nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
+    position: fixed; top: 0; left: 0; right: 0;
     z-index: 100;
-    padding: 1.5rem 3rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: linear-gradient(to bottom, rgba(26,18,9,0.95), transparent);
+    padding: 1.2rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: linear-gradient(to bottom, rgba(13,10,8,0.95), transparent);
+    backdrop-filter: blur(4px);
   }
   .logo {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.25em;
-    color: var(--gold);
-    text-transform: uppercase;
-  }
-  .logo span { color: var(--ember); }
-  .nav-links {
-    display: flex; gap: 2.5rem; list-style: none;
-  }
-  .nav-links a {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    color: var(--ash);
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.3rem;
+    letter-spacing: 0.1em;
+    color: var(--spark);
+    text-shadow: 0 0 20px rgba(240,112,32,0.6);
     text-decoration: none;
-    text-transform: uppercase;
-    opacity: 0.7;
-    transition: opacity 0.3s, color 0.3s;
   }
-  .nav-links a:hover { opacity: 1; color: var(--gold); }
+  .logo span { color: var(--molten); }
+  nav ul { list-style: none; display: flex; gap: 2.5rem; }
+  nav a {
+    color: var(--ash); text-decoration: none;
+    font-size: 0.85rem; letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-family: 'Share Tech Mono', monospace;
+    transition: color 0.2s;
+    position: relative;
+  }
+  nav a::after {
+    content: '';
+    position: absolute; bottom: -3px; left: 0;
+    width: 0; height: 1px;
+    background: var(--ember);
+    transition: width 0.3s;
+  }
+  nav a:hover { color: var(--spark); }
+  nav a:hover::after { width: 100%; }
 
-  /* Hero */
+  /* HERO */
   .hero {
     min-height: 100vh;
+    display: flex; align-items: center;
     position: relative;
-    display: flex;
-    align-items: center;
-    padding: 0 3rem;
     overflow: hidden;
+    padding: 0 8rem;
   }
-
   .hero-bg {
     position: absolute; inset: 0;
-    background: 
-      radial-gradient(ellipse 60% 80% at 70% 50%, rgba(196, 97, 26, 0.12) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(212, 168, 67, 0.06) 0%, transparent 60%),
-      var(--forge);
+    background:
+      radial-gradient(ellipse at 30% 60%, rgba(139,58,26,0.25) 0%, transparent 55%),
+      radial-gradient(ellipse at 75% 30%, rgba(212,80,10,0.15) 0%, transparent 50%),
+      linear-gradient(135deg, #0D0A08 0%, #1A1008 50%, #0D0A08 100%);
   }
-
-  .hero-content {
-    position: relative; z-index: 2;
-    max-width: 700px;
-    animation: fadeUp 1.2s ease forwards;
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(139,58,26,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(139,58,26,0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
   }
-
+  .hero-content { position: relative; z-index: 2; max-width: 700px; }
   .hero-eyebrow {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.35em;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
     color: var(--ember);
     text-transform: uppercase;
     margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  .hero-eyebrow::before {
-    content: '';
-    width: 40px; height: 1px;
-    background: var(--ember);
-  }
-
-  .hero h1 {
-    font-size: clamp(3.5rem, 8vw, 7rem);
-    font-weight: 300;
-    line-height: 0.95;
-    letter-spacing: -0.02em;
-    margin-bottom: 2rem;
-  }
-
-  .hero h1 em {
-    font-style: italic;
-    color: var(--gold);
-    display: block;
-  }
-
-  .hero p {
-    font-size: 1.25rem;
-    font-weight: 300;
-    line-height: 1.7;
-    color: rgba(232,224,212,0.7);
-    max-width: 480px;
-    margin-bottom: 3rem;
-  }
-
-  .hero-cta {
-    display: flex;
-    gap: 1.5rem;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-
-  .btn-primary {
-    display: inline-block;
-    padding: 1rem 2.5rem;
-    background: var(--ember);
-    color: var(--forge);
-    font-family: 'Space Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: background 0.3s, transform 0.2s;
-  }
-  .btn-primary:hover { background: var(--gold); transform: translateY(-2px); }
-
-  .btn-ghost {
-    display: inline-block;
-    padding: 1rem 2.5rem;
-    border: 1px solid rgba(232,224,212,0.3);
-    color: var(--ash);
-    font-family: 'Space Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: border-color 0.3s, color 0.3s;
-  }
-  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
-
-  .hero-visual {
-    position: absolute;
-    right: 5%;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 45vw;
-    max-width: 600px;
     opacity: 0;
-    animation: fadeIn 1.5s 0.5s ease forwards;
+    animation: fadeUp 0.8s 0.3s forwards;
   }
-  .hero-visual img {
-    width: 100%;
-    height: 90vh;
-    object-fit: cover;
-    object-position: center;
-    filter: sepia(20%) contrast(1.1);
-    mask-image: linear-gradient(to left, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 60%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 60%, transparent 100%);
+  .hero h1 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(3rem, 7vw, 6.5rem);
+    line-height: 0.95;
+    font-weight: 900;
+    color: var(--ash);
+    opacity: 0;
+    animation: fadeUp 0.8s 0.5s forwards;
   }
-
-  /* Marquee strip */
-  .marquee-strip {
+  .hero h1 .accent { color: var(--ember); display: block; }
+  .hero-sub {
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--steel);
+    margin: 1.5rem 0 2.5rem;
+    line-height: 1.6;
+    font-weight: 300;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.7s forwards;
+  }
+  .hero-cta {
+    display: flex; gap: 1.2rem; align-items: center;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.9s forwards;
+  }
+  .btn-primary {
+    padding: 0.9rem 2.2rem;
     background: var(--ember);
-    padding: 0.75rem 0;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-  .marquee-track {
-    display: inline-flex;
-    animation: marquee 20s linear infinite;
-    gap: 0;
-  }
-  .marquee-track span {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
     color: var(--forge);
-    padding: 0 2rem;
-  }
-  .marquee-track span::after {
-    content: '◆';
-    margin-left: 2rem;
-  }
-
-  /* About strip */
-  .about-strip {
-    padding: 6rem 3rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6rem;
-    align-items: center;
-    border-top: 1px solid rgba(255,255,255,0.05);
-  }
-
-  .about-text h2 {
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    font-weight: 300;
-    line-height: 1.1;
-    margin-bottom: 2rem;
-  }
-  .about-text h2 em { font-style: italic; color: var(--gold); }
-  .about-text p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: rgba(232,224,212,0.65);
-    margin-bottom: 1.2rem;
-  }
-
-  .about-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-  }
-  .stat {
-    padding: 2rem;
-    border: 1px solid rgba(255,255,255,0.07);
-    background: rgba(255,255,255,0.02);
-  }
-  .stat-number {
-    font-size: 3rem;
-    font-weight: 300;
-    color: var(--gold);
-    line-height: 1;
-    margin-bottom: 0.5rem;
-  }
-  .stat-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
+    text-decoration: none;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: rgba(232,224,212,0.5);
+    transition: all 0.3s;
+    border: none; cursor: none;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  }
+  .btn-primary:hover {
+    background: var(--molten);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(240,112,32,0.4);
+  }
+  .btn-ghost {
+    padding: 0.9rem 2.2rem;
+    border: 1px solid rgba(200,190,178,0.3);
+    color: var(--ash);
+    text-decoration: none;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  }
+  .btn-ghost:hover {
+    border-color: var(--ember);
+    color: var(--spark);
   }
 
-  /* Shop section */
-  #shop {
-    padding: 6rem 3rem;
+  /* Floating sparks */
+  .sparks { position: absolute; inset: 0; pointer-events: none; }
+  .spark {
+    position: absolute;
+    width: 2px; height: 2px;
+    background: var(--spark);
+    border-radius: 50%;
+    animation: floatSpark linear infinite;
+    opacity: 0;
+  }
+  @keyframes floatSpark {
+    0% { transform: translateY(0) scale(1); opacity: 0.8; }
+    100% { transform: translateY(-80px) scale(0); opacity: 0; }
   }
 
-  .section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 4rem;
-  }
+  /* SECTION BASE */
+  section { position: relative; z-index: 2; }
+
   .section-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.3em;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.5em;
     color: var(--ember);
     text-transform: uppercase;
-    margin-bottom: 0.75rem;
-    display: flex; align-items: center; gap: 1rem;
+    margin-bottom: 1rem;
   }
-  .section-label::before { content: ''; width: 30px; height: 1px; background: var(--ember); }
-  .section-header h2 {
-    font-size: clamp(2rem, 3.5vw, 3rem);
-    font-weight: 300;
+  .section-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    color: var(--chrome);
     line-height: 1.1;
+    margin-bottom: 1rem;
   }
-  .section-header h2 em { font-style: italic; color: var(--gold); }
 
-  /* Grid */
+  /* DIVIDER */
+  .forge-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--rust), var(--ember), var(--rust), transparent);
+    margin: 0 4rem;
+    position: relative;
+  }
+  .forge-divider::after {
+    content: '✦';
+    position: absolute; left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--ember);
+    background: var(--forge);
+    padding: 0 1rem;
+    font-size: 0.8rem;
+  }
+
+  /* COLLECTION */
+  #collection {
+    padding: 7rem 4rem;
+    background: linear-gradient(to bottom, var(--forge), #120E0A, var(--forge));
+  }
+  .collection-header { text-align: center; margin-bottom: 4rem; }
+  .collection-header p {
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--steel);
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
   .products-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 2px;
+    gap: 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
   }
 
   .product-card {
+    background: #110D0A;
+    border: 1px solid rgba(139,58,26,0.2);
     position: relative;
-    background: var(--smoke);
     overflow: hidden;
     cursor: none;
+    transition: all 0.4s;
     group: true;
   }
+  .product-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(212,80,10,0.05), transparent);
+    opacity: 0; transition: opacity 0.4s;
+  }
+  .product-card:hover {
+    border-color: rgba(212,80,10,0.5);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 0 1px rgba(212,80,10,0.2);
+  }
+  .product-card:hover::before { opacity: 1; }
 
-  .product-image {
-    width: 100%;
-    aspect-ratio: 3/4;
-    overflow: hidden;
-    position: relative;
+  .product-img {
+    width: 100%; aspect-ratio: 4/3;
+    object-fit: cover; object-position: center;
+    display: block;
+    transition: transform 0.5s;
+    filter: sepia(0.2) contrast(1.1);
   }
+  .product-card:hover .product-img { transform: scale(1.05); }
 
-  .product-image img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    object-position: center;
-    filter: sepia(15%) contrast(1.05);
-    transition: transform 0.7s ease, filter 0.5s ease;
-  }
-
-  .product-card:hover .product-image img {
-    transform: scale(1.08);
-    filter: sepia(5%) contrast(1.1);
-  }
-
-  .product-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(26,18,9,0.9) 0%, transparent 50%);
-    opacity: 0;
-    transition: opacity 0.4s;
-  }
-  .product-card:hover .product-overlay { opacity: 1; }
-
-  .product-add-btn {
-    position: absolute;
-    bottom: 1.5rem;
-    left: 50%;
-    transform: translateX(-50%) translateY(20px);
-    opacity: 0;
-    background: var(--ember);
-    color: var(--forge);
-    font-family: 'Space Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    padding: 0.75rem 1.5rem;
-    border: none;
-    cursor: none;
-    transition: opacity 0.3s, transform 0.3s;
-    white-space: nowrap;
-  }
-  .product-card:hover .product-add-btn {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
-  .product-add-btn:hover { background: var(--gold); }
-
-  .product-info {
-    padding: 1.5rem;
-    border-top: 1px solid rgba(255,255,255,0.05);
-  }
-  .product-category {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.55rem;
-    letter-spacing: 0.2em;
+  .product-info { padding: 1.5rem; }
+  .product-tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
     color: var(--ember);
     text-transform: uppercase;
     margin-bottom: 0.4rem;
   }
   .product-name {
-    font-size: 1.3rem;
-    font-weight: 400;
-    color: var(--ash);
-    margin-bottom: 0.75rem;
-    line-height: 1.2;
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1rem;
+    color: var(--chrome);
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+  .product-desc {
+    font-size: 0.9rem;
+    color: var(--steel);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    font-style: italic;
   }
   .product-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: flex; justify-content: space-between; align-items: center;
   }
   .product-price {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.9rem;
-    color: var(--gold);
-    font-weight: 700;
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.2rem;
+    color: var(--spark);
   }
-  .product-tag {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.55rem;
-    letter-spacing: 0.15em;
-    color: rgba(232,224,212,0.4);
-    text-transform: uppercase;
-  }
-
-  /* Featured / large card */
-  .product-card.featured {
-    grid-column: span 2;
-  }
-  .product-card.featured .product-image {
-    aspect-ratio: 16/7;
-  }
-
-  /* Process section */
-  .process {
-    padding: 6rem 3rem;
-    background: var(--smoke);
-    border-top: 1px solid rgba(255,255,255,0.04);
-  }
-  .process-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 3rem;
-    margin-top: 4rem;
-  }
-  .process-step { position: relative; }
-  .step-num {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
+  .add-btn {
+    padding: 0.5rem 1.2rem;
+    background: transparent;
+    border: 1px solid var(--ember);
     color: var(--ember);
-    margin-bottom: 1.5rem;
-    display: flex; align-items: center; gap: 0.75rem;
-  }
-  .step-num::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: rgba(232,224,212,0.1);
-  }
-  .process-step h3 {
-    font-size: 1.5rem;
-    font-weight: 300;
-    color: var(--ash);
-    margin-bottom: 1rem;
-    line-height: 1.2;
-  }
-  .process-step h3 em { font-style: italic; color: var(--gold); }
-  .process-step p {
-    font-size: 0.95rem;
-    line-height: 1.7;
-    color: rgba(232,224,212,0.55);
-  }
-
-  /* Contact / Order */
-  #contact {
-    padding: 8rem 3rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8rem;
-    align-items: center;
-  }
-  .contact-text h2 {
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
-    font-weight: 300;
-    line-height: 1;
-    margin-bottom: 2rem;
-  }
-  .contact-text h2 em { font-style: italic; color: var(--gold); display: block; }
-  .contact-text p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: rgba(232,224,212,0.65);
-    margin-bottom: 2.5rem;
-  }
-  .contact-details {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  .contact-detail {
-    display: flex;
-    gap: 1rem;
-    align-items: flex-start;
-  }
-  .contact-detail-icon {
+    font-family: 'Share Tech Mono', monospace;
     font-size: 0.7rem;
-    color: var(--ember);
-    margin-top: 0.1rem;
-    font-family: 'Space Mono', monospace;
-  }
-  .contact-detail-text {
-    font-size: 1rem;
-    color: rgba(232,224,212,0.75);
-  }
-  .contact-detail-text strong {
-    display: block;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--ember);
-    margin-bottom: 0.2rem;
+    cursor: none;
+    transition: all 0.2s;
+  }
+  .add-btn:hover, .add-btn.added {
+    background: var(--ember);
+    color: var(--forge);
   }
 
-  .contact-form { display: flex; flex-direction: column; gap: 1.5rem; }
-  .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
-  .form-group label {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
+  /* CART */
+  .cart-bar {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    z-index: 200;
+    background: linear-gradient(to top, rgba(13,10,8,0.98), rgba(13,10,8,0.9));
+    border-top: 1px solid rgba(212,80,10,0.4);
+    padding: 1rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+    transform: translateY(100%);
+    transition: transform 0.4s;
+    backdrop-filter: blur(10px);
+  }
+  .cart-bar.visible { transform: translateY(0); }
+  .cart-info { font-family: 'Share Tech Mono', monospace; font-size: 0.85rem; color: var(--ash); }
+  .cart-info span { color: var(--spark); }
+  .checkout-btn {
+    padding: 0.8rem 2rem;
+    background: var(--ember);
+    color: var(--forge);
+    border: none; cursor: none;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: rgba(232,224,212,0.5);
+    transition: all 0.3s;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  }
+  .checkout-btn:hover { background: var(--molten); }
+
+  /* CHECKOUT MODAL */
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 300;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(8px);
+    display: none; align-items: center; justify-content: center;
+    padding: 2rem;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: #110D0A;
+    border: 1px solid rgba(212,80,10,0.4);
+    max-width: 680px; width: 100%;
+    max-height: 90vh; overflow-y: auto;
+    position: relative;
+    padding: 3rem;
+  }
+  .modal::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(to right, transparent, var(--ember), transparent);
+  }
+  .modal-close {
+    position: absolute; top: 1.5rem; right: 1.5rem;
+    background: none; border: none;
+    color: var(--steel); font-size: 1.5rem; cursor: none;
+    transition: color 0.2s;
+  }
+  .modal-close:hover { color: var(--ember); }
+  .modal h2 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.5rem;
+    color: var(--chrome);
+    margin-bottom: 0.5rem;
+  }
+  .modal-sub {
+    font-size: 0.9rem; font-style: italic;
+    color: var(--steel); margin-bottom: 2rem;
+  }
+
+  .cart-items { margin-bottom: 1.5rem; }
+  .cart-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(139,58,26,0.2);
+    font-size: 0.95rem;
+  }
+  .cart-item-name { color: var(--ash); }
+  .cart-item-right { display: flex; align-items: center; gap: 1rem; }
+  .cart-item-price { color: var(--spark); font-family: 'Share Tech Mono', monospace; }
+  .remove-item {
+    background: none; border: none; color: var(--rust);
+    cursor: none; font-size: 0.8rem; transition: color 0.2s;
+  }
+  .remove-item:hover { color: var(--ember); }
+  .cart-total {
+    text-align: right;
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.1rem;
+    color: var(--spark);
+    margin-bottom: 2rem;
+    padding-top: 0.5rem;
+  }
+
+  .form-group { margin-bottom: 1.2rem; }
+  .form-group label {
+    display: block;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--ember);
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
   }
   .form-group input,
-  .form-group select,
-  .form-group textarea {
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
     background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 1px solid rgba(139,58,26,0.3);
     color: var(--ash);
-    padding: 0.9rem 1rem;
+    padding: 0.7rem 1rem;
     font-family: 'Cormorant Garamond', serif;
     font-size: 1rem;
     outline: none;
-    transition: border-color 0.3s;
-    cursor: none;
+    transition: border-color 0.2s;
   }
   .form-group input:focus,
-  .form-group select,
-  .form-group textarea:focus {
-    border-color: var(--ember);
-  }
-  .form-group textarea { resize: vertical; min-height: 120px; }
-  .form-group select option { background: var(--iron); }
+  .form-group textarea:focus,
+  .form-group select:focus { border-color: var(--ember); }
+  .form-group textarea { resize: vertical; min-height: 80px; }
+  .form-group select option { background: #110D0A; }
 
-  /* Footer */
-  footer {
-    background: #0d0a05;
-    padding: 4rem 3rem 2rem;
-    border-top: 1px solid rgba(255,255,255,0.05);
+  .send-options {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+    margin-top: 1.5rem;
   }
-  .footer-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 4rem;
-    margin-bottom: 3rem;
-  }
-  .footer-brand p {
-    font-size: 1rem;
-    line-height: 1.7;
-    color: rgba(232,224,212,0.5);
-    margin-top: 1rem;
-    max-width: 280px;
-  }
-  .footer-col h4 {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.25em;
+  .send-btn {
+    padding: 0.9rem;
+    border: 1px solid;
+    background: transparent;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
+    cursor: none;
+    transition: all 0.3s;
+    display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  }
+  .send-whatsapp {
+    border-color: #25D366; color: #25D366;
+  }
+  .send-whatsapp:hover { background: #25D366; color: var(--forge); }
+  .send-sms {
+    border-color: var(--ember); color: var(--ember);
+  }
+  .send-sms:hover { background: var(--ember); color: var(--forge); }
+
+  /* ABOUT */
+  #about {
+    padding: 7rem 8rem;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
+    max-width: 1400px; margin: 0 auto;
+  }
+  .about-text p {
+    font-size: 1.1rem; line-height: 1.9;
+    color: var(--ash);
+    margin-bottom: 1.2rem;
+    font-weight: 300;
+  }
+  .about-text p em { color: var(--molten); font-style: italic; }
+  .about-visual {
+    position: relative;
+  }
+  .about-badge {
+    background: #110D0A;
+    border: 1px solid rgba(212,80,10,0.3);
+    padding: 2rem;
+    text-align: center;
+  }
+  .about-badge .big-num {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 5rem;
     color: var(--ember);
+    line-height: 1;
+    display: block;
+    text-shadow: 0 0 30px rgba(212,80,10,0.5);
+  }
+  .about-badge .big-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    color: var(--steel);
+    text-transform: uppercase;
+    margin-top: 0.5rem;
+  }
+  .about-list {
+    margin-top: 1rem;
+    list-style: none;
+  }
+  .about-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(139,58,26,0.15);
+    font-size: 0.9rem;
+    color: var(--steel);
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .about-list li::before {
+    content: '▸';
+    color: var(--ember);
+    font-size: 0.7rem;
+  }
+
+  /* CONTACT */
+  #contact {
+    padding: 7rem 4rem;
+    background: #090705;
+  }
+  .contact-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1.5fr; gap: 6rem;
+  }
+  .contact-info .section-title { margin-bottom: 1.5rem; }
+  .contact-detail {
+    display: flex; align-items: flex-start; gap: 1rem;
     margin-bottom: 1.5rem;
   }
-  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
-  .footer-col ul a {
-    color: rgba(232,224,212,0.5);
-    text-decoration: none;
-    font-size: 0.95rem;
-    transition: color 0.3s;
+  .contact-icon {
+    width: 40px; height: 40px; min-width: 40px;
+    border: 1px solid rgba(212,80,10,0.3);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--ember); font-size: 1rem;
   }
-  .footer-col ul a:hover { color: var(--gold); }
-  .footer-bottom {
-    border-top: 1px solid rgba(255,255,255,0.05);
-    padding-top: 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.55rem;
-    letter-spacing: 0.15em;
-    color: rgba(232,224,212,0.3);
-    text-transform: uppercase;
-  }
-
-  /* Divider */
-  .divider {
-    width: 100%;
-    height: 1px;
-    background: linear-gradient(to right, transparent, rgba(196,97,26,0.4), transparent);
-  }
-
-  /* Animations */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(40px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-  @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-
-  /* Cart toast */
-  .toast {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    background: var(--iron);
-    border: 1px solid var(--ember);
-    color: var(--ash);
-    padding: 1rem 1.5rem;
-    font-family: 'Space Mono', monospace;
+  .contact-detail-text .label {
+    font-family: 'Share Tech Mono', monospace;
     font-size: 0.65rem;
-    letter-spacing: 0.1em;
-    z-index: 500;
-    transform: translateY(100px);
-    opacity: 0;
-    transition: all 0.4s ease;
-  }
-  .toast.show { transform: translateY(0); opacity: 1; }
-
-  /* Cart badge */
-  .cart-btn {
-    position: relative;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    color: var(--ash);
-    text-decoration: none;
+    letter-spacing: 0.3em;
+    color: var(--ember);
     text-transform: uppercase;
-    opacity: 0.7;
-    transition: opacity 0.3s, color 0.3s;
-    background: none;
-    border: none;
-    cursor: none;
+    display: block; margin-bottom: 0.2rem;
   }
-  .cart-btn:hover { opacity: 1; color: var(--gold); }
-  .cart-count {
-    position: absolute;
-    top: -8px; right: -10px;
+  .contact-detail-text .value {
+    color: var(--ash); font-size: 1rem;
+  }
+  .contact-detail-text a {
+    color: var(--ash); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .contact-detail-text a:hover { color: var(--spark); }
+
+  .contact-form .form-group { margin-bottom: 1rem; }
+  .contact-form .submit-row {
+    display: flex; gap: 1rem; margin-top: 1.5rem;
+  }
+  .submit-btn {
+    padding: 0.9rem 2rem;
     background: var(--ember);
     color: var(--forge);
-    font-size: 0.5rem;
-    width: 16px; height: 16px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 700;
-    opacity: 0;
-    transition: opacity 0.3s;
+    border: none; cursor: none;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    flex: 1;
   }
-  .cart-count.visible { opacity: 1; }
+  .submit-btn:hover { background: var(--molten); }
+  .submit-btn.wa {
+    background: #25D366;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  }
+  .submit-btn.wa:hover { background: #1DA851; }
 
-  /* Scroll reveal */
+  /* FOOTER */
+  footer {
+    padding: 3rem 4rem;
+    border-top: 1px solid rgba(139,58,26,0.2);
+    display: flex; justify-content: space-between; align-items: center;
+    position: relative; z-index: 2;
+  }
+  footer p {
+    font-size: 0.8rem;
+    color: rgba(200,190,178,0.4);
+    font-family: 'Share Tech Mono', monospace;
+    letter-spacing: 0.1em;
+  }
+  footer .footer-logo {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.9rem;
+    color: var(--ember);
+    opacity: 0.7;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
   .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.7s, transform 0.7s;
   }
   .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 1; transform: translateY(0);
   }
 
+  /* NOTIFICATION */
+  .notif {
+    position: fixed; bottom: 6rem; right: 2rem;
+    background: #1A1008;
+    border: 1px solid var(--ember);
+    padding: 0.8rem 1.5rem;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--spark);
+    letter-spacing: 0.1em;
+    z-index: 500;
+    opacity: 0; pointer-events: none;
+    transition: all 0.3s;
+    transform: translateX(20px);
+    clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+  }
+  .notif.show { opacity: 1; transform: translateX(0); }
+
+  /* RESPONSIVE */
   @media (max-width: 900px) {
-    nav { padding: 1.2rem 1.5rem; }
-    .nav-links { display: none; }
-    .hero { padding: 0 1.5rem; }
-    .hero-visual { display: none; }
-    .about-strip { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 1.5rem; }
-    #shop { padding: 4rem 1.5rem; }
-    .products-grid { grid-template-columns: 1fr 1fr; }
-    .product-card.featured { grid-column: span 2; }
-    .process { padding: 4rem 1.5rem; }
-    .process-grid { grid-template-columns: 1fr 1fr; }
-    #contact { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 1.5rem; }
-    .footer-grid { grid-template-columns: 1fr; gap: 2rem; padding: 0; }
-    footer { padding: 3rem 1.5rem 2rem; }
-  }
-
-  @media (max-width: 600px) {
-    .products-grid { grid-template-columns: 1fr; }
-    .product-card.featured { grid-column: span 1; }
-    .product-card.featured .product-image { aspect-ratio: 3/4; }
-    .about-stats { grid-template-columns: 1fr 1fr; }
-    .process-grid { grid-template-columns: 1fr; }
+    nav { padding: 1rem 1.5rem; }
+    nav ul { display: none; }
+    .hero { padding: 0 2rem; }
+    #about { grid-template-columns: 1fr; padding: 4rem 2rem; gap: 3rem; }
+    .contact-inner { grid-template-columns: 1fr; }
+    #contact { padding: 4rem 2rem; }
+    #collection { padding: 4rem 1.5rem; }
+    .cart-bar { padding: 1rem 1.5rem; }
+    .send-options { grid-template-columns: 1fr; }
+    .contact-form .submit-row { flex-direction: column; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
   }
 </style>
 </head>
@@ -719,511 +679,455 @@
 
 <!-- NAV -->
 <nav>
-  <div class="logo"><span>Iron</span> Souls</div>
-  <ul class="nav-links">
-    <li><a href="#shop">Shop</a></li>
-    <li><a href="#process">Process</a></li>
-    <li><a href="#contact">Order</a></li>
-    <li><button class="cart-btn" id="cartBtn">Cart <span class="cart-count" id="cartCount">0</span></button></li>
+  <a href="#" class="logo">Iron <span>Souls</span></a>
+  <ul>
+    <li><a href="#collection">Collection</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#" id="navCart">Cart <span id="cartCount" style="color:var(--spark)"></span></a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="sparks" id="sparks"></div>
   <div class="hero-content">
-    <div class="hero-eyebrow">Stellenbosch, Western Cape</div>
-    <h1>
-      Forged from<br>
-      <em>Scrap & Soul</em>
-    </h1>
-    <p>Hand-welded metal sculptures that breathe life into forgotten iron. Each piece is one-of-a-kind — made from salvaged bolts, rebar, and steel by a craftsman who sees people where others see rust.</p>
+    <p class="hero-eyebrow">Handcrafted in Stellenbosch</p>
+    <h1>Iron <span class="accent">Souls</span></h1>
+    <p class="hero-sub">Scrap metal forged into life. Every figure tells a story. No two pieces are the same.</p>
     <div class="hero-cta">
-      <a href="#shop" class="btn-primary">Explore the Collection</a>
+      <a href="#collection" class="btn-primary">View Collection</a>
       <a href="#contact" class="btn-ghost">Commission a Piece</a>
     </div>
   </div>
-  <div class="hero-visual">
-    <img src="IMG-20260420-WA0117.jpg" alt="Iron Souls sculpture" loading="lazy">
-  </div>
 </section>
 
-<!-- MARQUEE -->
-<div class="marquee-strip">
-  <div class="marquee-track" id="marqueeTrack">
-    <span>Handmade</span><span>One of a Kind</span><span>Recycled Steel</span><span>Western Cape Craft</span><span>Plant Holders</span><span>Wall Art</span><span>Wine Racks</span><span>Desk Sculptures</span><span>Handmade</span><span>One of a Kind</span><span>Recycled Steel</span><span>Western Cape Craft</span><span>Plant Holders</span><span>Wall Art</span><span>Wine Racks</span><span>Desk Sculptures</span>
+<div class="forge-divider"></div>
+
+<!-- COLLECTION -->
+<section id="collection">
+  <div class="collection-header reveal">
+    <p class="section-label">The Workshop</p>
+    <h2 class="section-title">Current Collection</h2>
+    <p>Every piece is welded by hand from reclaimed rebar, bolts, nuts, and scrap metal. Raw. Honest. Alive.</p>
   </div>
-</div>
+  <div class="products-grid" id="productsGrid"></div>
+</section>
+
+<div class="forge-divider"></div>
 
 <!-- ABOUT -->
-<section class="about-strip">
+<section id="about">
   <div class="about-text reveal">
-    <p class="section-label">Our Story</p>
-    <h2>Iron that<br><em>remembers</em><br>its past</h2>
-    <p>Every bolt, every rod, every scrap of steel was once something else. In these sculptures, it becomes someone — a fisherman hauling line, a figure straining under the weight of a stone, a caretaker cradling a plant.</p>
-    <p>These are not decorations. They are characters. Give one a home and it will give your space a story.</p>
+    <p class="section-label">The Forge</p>
+    <h2 class="section-title">Born from Fire</h2>
+    <p>Iron Souls started with a welder, a pile of scrap, and a simple idea: <em>metal has memory.</em> Rebar that once held up buildings. Bolts that held engines together. Nuts that kept machines running.</p>
+    <p>Each sculpture is built from reclaimed materials, giving new life to metal that has already lived. The figures are not just decorative objects. They carry weight, history, and character.</p>
+    <p>Based in <em>Stellenbosch, Western Cape</em>, we create collector pieces, functional art (bottle holders, pot stands), and custom commissions. If you can imagine it, we can forge it.</p>
+    <ul class="about-list">
+      <li>100% handcrafted, no moulds or casting</li>
+      <li>Reclaimed and new steel hardware</li>
+      <li>Custom commissions welcomed</li>
+      <li>Delivery available across South Africa</li>
+    </ul>
   </div>
-  <div class="about-stats reveal">
-    <div class="stat">
-      <div class="stat-number">100%</div>
-      <div class="stat-label">Salvaged Materials</div>
+  <div class="about-visual reveal">
+    <div class="about-badge">
+      <span class="big-num">∞</span>
+      <p class="big-label">Unique pieces, no duplicates</p>
     </div>
-    <div class="stat">
-      <div class="stat-number">0</div>
-      <div class="stat-label">Identical Pieces</div>
-    </div>
-    <div class="stat">
-      <div class="stat-number">R150</div>
-      <div class="stat-label">Starting Price</div>
-    </div>
-    <div class="stat">
-      <div class="stat-number">∞</div>
-      <div class="stat-label">Stories Told</div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- SHOP -->
-<section id="shop">
-  <div class="section-header reveal">
-    <div>
-      <div class="section-label">The Collection</div>
-      <h2>Choose your<br><em>character</em></h2>
-    </div>
-    <a href="#contact" class="btn-ghost">Custom Orders →</a>
-  </div>
-
-  <div class="products-grid">
-
-    <!-- Product 1 -->
-    <div class="product-card reveal">
-      <div class="product-image">
-        <img src="IMG-20260420-WA0117.jpg" alt="Atlas Plant Stand">
-        <div class="product-overlay"></div>
-        <button class="product-add-btn" onclick="addToCart('Atlas Plant Stand', 200)">Add to Cart</button>
+    <div style="margin-top:1.5rem; display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+      <div class="about-badge">
+        <span class="big-num" style="font-size:2.5rem;">R150</span>
+        <p class="big-label">Starting price</p>
       </div>
-      <div class="product-info">
-        <div class="product-category">Desk · Plant Holder</div>
-        <div class="product-name">Atlas Plant Stand</div>
-        <div class="product-footer">
-          <div class="product-price">R 200</div>
-          <div class="product-tag">Freestanding</div>
-        </div>
+      <div class="about-badge">
+        <span class="big-num" style="font-size:2.5rem;">ZA</span>
+        <p class="big-label">Nationwide delivery</p>
       </div>
-    </div>
-
-    <!-- Product 2 -->
-    <div class="product-card reveal">
-      <div class="product-image">
-        <img src="IMG-20260420-WA0114.jpg" alt="The Thinker Planter">
-        <div class="product-overlay"></div>
-        <button class="product-add-btn" onclick="addToCart('The Thinker Planter', 200)">Add to Cart</button>
-      </div>
-      <div class="product-info">
-        <div class="product-category">Desk · Plant Holder</div>
-        <div class="product-name">The Thinker Planter</div>
-        <div class="product-footer">
-          <div class="product-price">R 200</div>
-          <div class="product-tag">With ceramic pot</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Product 3 — wall carrier -->
-    <div class="product-card reveal">
-      <div class="product-image">
-        <img src="IMG-20260420-WA0116.jpg" alt="The Porter – Wall Mount">
-        <div class="product-overlay"></div>
-        <button class="product-add-btn" onclick="addToCart('The Porter – Wall Mount', 350)">Add to Cart</button>
-      </div>
-      <div class="product-info">
-        <div class="product-category">Wall Art · Plant Holder</div>
-        <div class="product-name">The Porter — Wall Mount</div>
-        <div class="product-footer">
-          <div class="product-price">R 350</div>
-          <div class="product-tag">Wall mounted</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Product 4 -->
-    <div class="product-card reveal">
-      <div class="product-image">
-        <img src="IMG-20260420-WA0106.jpg" alt="Anvil Man Sculpture">
-        <div class="product-overlay"></div>
-        <button class="product-add-btn" onclick="addToCart('Anvil Man Sculpture', 150)">Add to Cart</button>
-      </div>
-      <div class="product-info">
-        <div class="product-category">Desk · Decorative</div>
-        <div class="product-name">Anvil Man</div>
-        <div class="product-footer">
-          <div class="product-price">R 150</div>
-          <div class="product-tag">Pure sculpture</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Product 5 — Featured fisherman -->
-    <div class="product-card featured reveal">
-      <div class="product-image">
-        <img src="IMG-20260420-WA0108.jpg" alt="The Fisherman – Wall Bracket">
-        <div class="product-overlay"></div>
-        <button class="product-add-btn" onclick="addToCart('The Fisherman – Wall Bracket', 280)">Add to Cart</button>
-      </div>
-      <div class="product-info">
-        <div class="product-category">Wall Art · Decorative</div>
-        <div class="product-name">The Fisherman — Wall Bracket</div>
-        <div class="product-footer">
-          <div class="product-price">R 280</div>
-          <div class="product-tag">Mounts to wall</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Product 6 -->
-    <div class="product-card reveal">
-      <div class="product-image">
-        <img src="IMG-20260420-WA0109.jpg" alt="The Lifter Sculpture">
-        <div class="product-overlay"></div>
-        <button class="product-add-btn" onclick="addToCart('The Lifter Sculpture', 180)">Add to Cart</button>
-      </div>
-      <div class="product-info">
-        <div class="product-category">Desk · Decorative</div>
-        <div class="product-name">The Lifter</div>
-        <div class="product-footer">
-          <div class="product-price">R 180</div>
-          <div class="product-tag">With stone + plant</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Product 7 — R800 piece -->
-    <div class="product-card reveal">
-      <div class="product-image">
-        <img src="IMG-20260420-WA0104.jpg" alt="Offering Planter – Prestige">
-        <div class="product-overlay"></div>
-        <button class="product-add-btn" onclick="addToCart('Offering Planter – Prestige', 800)">Add to Cart</button>
-      </div>
-      <div class="product-info">
-        <div class="product-category">Prestige · Plant Holder</div>
-        <div class="product-name">The Offering — Prestige Planter</div>
-        <div class="product-footer">
-          <div class="product-price">R 800</div>
-          <div class="product-tag">Socket head · terracotta</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Product 8 — wine rack -->
-    <div class="product-card reveal">
-      <div class="product-image">
-        <img src="IMG-20260420-WA0098.jpg" alt="Wine Steward Bottle Holder">
-        <div class="product-overlay"></div>
-        <button class="product-add-btn" onclick="addToCart('Wine Steward Bottle Holder', 350)">Add to Cart</button>
-      </div>
-      <div class="product-info">
-        <div class="product-category">Kitchen · Wine Rack</div>
-        <div class="product-name">The Wine Steward</div>
-        <div class="product-footer">
-          <div class="product-price">R 350</div>
-          <div class="product-tag">Bottle not included</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Product 9 — climber lantern holder -->
-    <div class="product-card reveal">
-      <div class="product-image">
-        <img src="IMG-20260420-WA0112.jpg" alt="The Climber Lantern Holder">
-        <div class="product-overlay"></div>
-        <button class="product-add-btn" onclick="addToCart('The Climber Lantern Holder', 400)">Add to Cart</button>
-      </div>
-      <div class="product-info">
-        <div class="product-category">Wall Art · Lantern Holder</div>
-        <div class="product-name">The Climber — Lantern Holder</div>
-        <div class="product-footer">
-          <div class="product-price">R 400</div>
-          <div class="product-tag">Wall mounted</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Product 10 — rock climbers -->
-    <div class="product-card reveal">
-      <div class="product-image">
-        <img src="IMG-20260420-WA0097.jpg" alt="The Summit – Rock Climbers">
-        <div class="product-overlay"></div>
-        <button class="product-add-btn" onclick="addToCart('The Summit – Rock Climbers', 480)">Add to Cart</button>
-      </div>
-      <div class="product-info">
-        <div class="product-category">Desk · Prestige Sculpture</div>
-        <div class="product-name">The Summit — Rock Climbers</div>
-        <div class="product-footer">
-          <div class="product-price">R 480</div>
-          <div class="product-tag">Wire figures · stone</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Product 11 — pushing planter -->
-    <div class="product-card reveal">
-      <div class="product-image">
-        <img src="IMG-20260420-WA0101.jpg" alt="The Pusher Planter">
-        <div class="product-overlay"></div>
-        <button class="product-add-btn" onclick="addToCart('The Pusher Planter', 200)">Add to Cart</button>
-      </div>
-      <div class="product-info">
-        <div class="product-category">Desk · Plant Holder</div>
-        <div class="product-name">The Pusher — Planter</div>
-        <div class="product-footer">
-          <div class="product-price">R 200</div>
-          <div class="product-tag">With stone pot</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Product 12 — placed in home -->
-    <div class="product-card reveal">
-      <div class="product-image">
-        <img src="IMG-20260420-WA0100.jpg" alt="Desk Companion Planter">
-        <div class="product-overlay"></div>
-        <button class="product-add-btn" onclick="addToCart('Desk Companion Planter', 200)">Add to Cart</button>
-      </div>
-      <div class="product-info">
-        <div class="product-category">Desk · Plant Holder</div>
-        <div class="product-name">Desk Companion — Planted</div>
-        <div class="product-footer">
-          <div class="product-price">R 200</div>
-          <div class="product-tag">As shown, in situ</div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- PROCESS -->
-<section class="process" id="process">
-  <div class="section-header reveal">
-    <div>
-      <div class="section-label">The Making</div>
-      <h2>From scrap to<br><em>story</em></h2>
-    </div>
-  </div>
-  <div class="process-grid">
-    <div class="process-step reveal">
-      <div class="step-num">01</div>
-      <h3>Salvage<br><em>the material</em></h3>
-      <p>Old bolts, bent rebar, spent springs, socket heads, coil wire. Nothing is bought new — every piece starts as something discarded.</p>
-    </div>
-    <div class="process-step reveal">
-      <div class="step-num">02</div>
-      <h3>Find<br><em>the figure</em></h3>
-      <p>Before a weld is laid, the character is spotted in the material. The shape of a bolt suggests a torso. A coil becomes a spine. The sculptor sees people in iron.</p>
-    </div>
-    <div class="process-step reveal">
-      <div class="step-num">03</div>
-      <h3>Weld &<br><em>compose</em></h3>
-      <p>Each joint is hand-welded. Proportions are eyeballed, not measured. The result is never perfectly symmetrical — and that's exactly right.</p>
-    </div>
-    <div class="process-step reveal">
-      <div class="step-num">04</div>
-      <h3>Finish &<br><em>release</em></h3>
-      <p>A heat patina, brushed finish, or matte black coat. Then a plant, a stone, or a bottle is introduced — and the character comes alive.</p>
     </div>
   </div>
 </section>
 
-<div class="divider"></div>
+<div class="forge-divider"></div>
 
-<!-- CONTACT / ORDER -->
+<!-- CONTACT -->
 <section id="contact">
-  <div class="contact-text reveal">
-    <p class="section-label">Get in Touch</p>
-    <h2>Order a piece or<br><em>commission</em><br>your own</h2>
-    <p>Every sculpture in the collection is available while stock lasts. Custom commissions are welcome — describe a concept or occasion and we'll make it from iron.</p>
-    <div class="contact-details">
+  <div class="contact-inner">
+    <div class="contact-info reveal">
+      <p class="section-label">Reach Out</p>
+      <h2 class="section-title">Get in Touch</h2>
+      <p style="font-size:1rem; color:var(--steel); line-height:1.7; margin-bottom:2rem; font-style:italic;">
+        Want a custom piece? Have a question? Just want to talk metal? We're here.
+      </p>
       <div class="contact-detail">
-        <div class="contact-detail-icon">◆</div>
+        <div class="contact-icon">📍</div>
         <div class="contact-detail-text">
-          <strong>Location</strong>
-          Stellenbosch, Western Cape, South Africa
+          <span class="label">Location</span>
+          <span class="value">Stellenbosch, Western Cape, South Africa</span>
         </div>
       </div>
       <div class="contact-detail">
-        <div class="contact-detail-icon">◆</div>
+        <div class="contact-icon">📱</div>
         <div class="contact-detail-text">
-          <strong>Delivery</strong>
-          Courier available nationally · local pickup welcome
+          <span class="label">WhatsApp / Phone</span>
+          <span class="value"><a href="https://wa.me/27762159141">+27 76 215 9141</a></span>
         </div>
       </div>
       <div class="contact-detail">
-        <div class="contact-detail-icon">◆</div>
+        <div class="contact-icon">⏱</div>
         <div class="contact-detail-text">
-          <strong>Payment</strong>
-          EFT · Cash on collection
-        </div>
-      </div>
-      <div class="contact-detail">
-        <div class="contact-detail-icon">◆</div>
-        <div class="contact-detail-text">
-          <strong>Lead time</strong>
-          Stock items ready immediately · Custom: 7–14 days
+          <span class="label">Response Time</span>
+          <span class="value">Usually within a few hours</span>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="contact-form reveal">
-    <div class="form-group">
-      <label>Your Name</label>
-      <input type="text" placeholder="Full name">
+    <div class="contact-form reveal">
+      <p class="section-label">Send a Message</p>
+      <h2 class="section-title" style="font-size:1.5rem;">Commission or Enquiry</h2>
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" id="cName" placeholder="How shall we call you?">
+      </div>
+      <div class="form-group">
+        <label>Your Number / Email</label>
+        <input type="text" id="cContact" placeholder="+27 or email address">
+      </div>
+      <div class="form-group">
+        <label>What are you looking for?</label>
+        <select id="cType">
+          <option value="">Select interest...</option>
+          <option>Custom commission piece</option>
+          <option>Existing collection item</option>
+          <option>Bottle holder / functional art</option>
+          <option>Pot stand / planter figure</option>
+          <option>Gift idea</option>
+          <option>Just browsing / general enquiry</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Your Message</label>
+        <textarea id="cMessage" placeholder="Tell us what you have in mind. The more detail, the better..."></textarea>
+      </div>
+      <div class="submit-row">
+        <button class="submit-btn" onclick="sendContactWA()">📱 Send via WhatsApp</button>
+        <button class="submit-btn wa" onclick="sendContactSMS()">💬 Send via SMS</button>
+      </div>
     </div>
-    <div class="form-group">
-      <label>Email or WhatsApp</label>
-      <input type="text" placeholder="how should we reach you?">
-    </div>
-    <div class="form-group">
-      <label>I'm interested in</label>
-      <select>
-        <option value="">Select a piece or request…</option>
-        <option>Atlas Plant Stand — R200</option>
-        <option>The Thinker Planter — R200</option>
-        <option>The Porter Wall Mount — R350</option>
-        <option>Anvil Man Sculpture — R150</option>
-        <option>The Fisherman Wall Bracket — R280</option>
-        <option>The Lifter Sculpture — R180</option>
-        <option>The Offering Prestige Planter — R800</option>
-        <option>The Wine Steward — R350</option>
-        <option>The Climber Lantern Holder — R400</option>
-        <option>The Summit Rock Climbers — R480</option>
-        <option>The Pusher Planter — R200</option>
-        <option>Desk Companion Planter — R200</option>
-        <option>Custom commission</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label>Message (optional)</label>
-      <textarea placeholder="Custom ideas, dimensions, themes, gifting notes…"></textarea>
-    </div>
-    <button class="btn-primary" onclick="submitForm()" style="border:none; font-size:0.7rem; letter-spacing:0.2em; padding: 1rem 2.5rem; cursor:none; font-family:'Space Mono',monospace;">Send Enquiry →</button>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <div class="logo" style="font-size:1rem;"><span>Iron</span> Souls</div>
-      <p>Handcrafted metal sculpture from Stellenbosch. Each piece made from salvaged steel — one character at a time.</p>
-    </div>
-    <div class="footer-col">
-      <h4>Collection</h4>
-      <ul>
-        <li><a href="#shop">Plant Holders</a></li>
-        <li><a href="#shop">Wall Art</a></li>
-        <li><a href="#shop">Wine Racks</a></li>
-        <li><a href="#shop">Desk Sculptures</a></li>
-        <li><a href="#contact">Custom Orders</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Info</h4>
-      <ul>
-        <li><a href="#process">The Making</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="#contact">Delivery & Payment</a></li>
-        <li><a href="#contact">Commission a Piece</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2026 Iron Souls · Stellenbosch, WC</span>
-    <span>Handmade · One of a kind · Forged with intention</span>
-  </div>
+  <span class="footer-logo">Iron Souls</span>
+  <p>Stellenbosch, Western Cape &nbsp;|&nbsp; +27 76 215 9141</p>
+  <p>Handcrafted with fire &amp; intention</p>
 </footer>
 
-<div class="toast" id="toast"></div>
+<!-- CART BAR -->
+<div class="cart-bar" id="cartBar">
+  <div class="cart-info">
+    <span id="cartBarCount">0</span> items in your order &nbsp;|&nbsp; Total: <span id="cartBarTotal">R0</span>
+  </div>
+  <button class="checkout-btn" onclick="openCheckout()">Proceed to Order ▸</button>
+</div>
+
+<!-- CHECKOUT MODAL -->
+<div class="modal-overlay" id="checkoutModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeCheckout()">✕</button>
+    <h2>Your Order</h2>
+    <p class="modal-sub">Review your selection and send your order via WhatsApp or SMS.</p>
+    <div class="cart-items" id="modalCartItems"></div>
+    <div class="cart-total" id="modalCartTotal"></div>
+    <div class="form-group">
+      <label>Your Name</label>
+      <input type="text" id="orderName" placeholder="Full name">
+    </div>
+    <div class="form-group">
+      <label>WhatsApp / Phone Number</label>
+      <input type="tel" id="orderPhone" placeholder="+27...">
+    </div>
+    <div class="form-group">
+      <label>Delivery or Collection?</label>
+      <select id="orderDelivery">
+        <option value="collection">Collection in Stellenbosch (free)</option>
+        <option value="delivery">Delivery (courier - we'll quote)</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Notes (optional)</label>
+      <textarea id="orderNotes" placeholder="Any special requests or questions..."></textarea>
+    </div>
+    <div class="send-options">
+      <button class="send-btn send-whatsapp" onclick="placeOrder('whatsapp')">
+        <span>📱</span> Order via WhatsApp
+      </button>
+      <button class="send-btn send-sms" onclick="placeOrder('sms')">
+        <span>💬</span> Order via SMS
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- NOTIFICATION -->
+<div class="notif" id="notif"></div>
 
 <script>
-  // Custom cursor
-  const cursor = document.getElementById('cursor');
-  const cursorRing = document.getElementById('cursorRing');
-  document.addEventListener('mousemove', e => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-    setTimeout(() => {
-      cursorRing.style.left = e.clientX + 'px';
-      cursorRing.style.top = e.clientY + 'px';
-    }, 60);
-  });
-  document.querySelectorAll('a, button, .product-card').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      cursor.style.width = '20px';
-      cursor.style.height = '20px';
-      cursorRing.style.width = '50px';
-      cursorRing.style.height = '50px';
-    });
-    el.addEventListener('mouseleave', () => {
-      cursor.style.width = '12px';
-      cursor.style.height = '12px';
-      cursorRing.style.width = '36px';
-      cursorRing.style.height = '36px';
-    });
-  });
+// CURSOR
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX - 6 + 'px';
+  cursor.style.top = e.clientY - 6 + 'px';
+  ring.style.left = e.clientX - 18 + 'px';
+  ring.style.top = e.clientY - 18 + 'px';
+});
 
-  // Cart
-  let cartCount = 0;
-  function addToCart(name, price) {
-    cartCount++;
-    const countEl = document.getElementById('cartCount');
-    countEl.textContent = cartCount;
-    countEl.classList.add('visible');
-    showToast(`Added: ${name} · R${price}`);
+// SPARKS
+const sparksEl = document.getElementById('sparks');
+function makeSpark() {
+  const s = document.createElement('div');
+  s.className = 'spark';
+  s.style.left = Math.random() * 60 + 10 + '%';
+  s.style.bottom = '0';
+  s.style.animationDuration = (2 + Math.random() * 3) + 's';
+  s.style.animationDelay = Math.random() * 2 + 's';
+  s.style.opacity = Math.random() * 0.8;
+  sparksEl.appendChild(s);
+  setTimeout(() => s.remove(), 5000);
+}
+setInterval(makeSpark, 400);
+
+// PRODUCTS DATA
+const products = [
+  {
+    id: 1, tag: 'Sports Figure', name: 'The Golfer',
+    desc: 'Mid-swing rebar figure with hex-nut feet. A perfect gift for the golfer in your life.',
+    price: 250, img: 'IMG-20260420-WA096.jpeg'
+  },
+  {
+    id: 2, tag: 'Dynamic Figure', name: 'The Runner',
+    desc: 'Captured mid-stride, this sprinting figure radiates kinetic energy. Hex-nut shoes included.',
+    price: 220, img: 'IMG-20260420-WA097.jpeg'
+  },
+  {
+    id: 3, tag: 'Bottle Holder', name: 'The Whiskey Man',
+    desc: 'Rebar figure holding your favourite bottle at a dramatic tilt. Polished steel base. Fits standard 750ml.',
+    price: 350, img: 'IMG-20260420-WA098.jpeg'
+  },
+  {
+    id: 4, tag: 'Strength Figure', name: 'Atlas — The Boulder',
+    desc: 'A raw wire figure bearing a real stone on its back. Mounted on a rusted plate base. Each stone is unique.',
+    price: 200, img: 'IMG-20260420-WA099.jpeg'
+  },
+  {
+    id: 5, tag: 'Creative Figure', name: 'The Artist',
+    desc: 'Metal figure at a miniature easel, brush in hand. For the creators and dreamers.',
+    price: 280, img: 'IMG-20260420-WA0100.jpeg'
+  },
+  {
+    id: 6, tag: 'Sports Figure', name: 'The Tennis Player',
+    desc: 'Rebar athlete mid-backhand with a ring-welded racket. Spring and bolt body construction.',
+    price: 250, img: 'IMG-20260420-WA0101.jpeg'
+  },
+  {
+    id: 7, tag: 'Curiosity Figure', name: 'The Astronomer',
+    desc: 'A nut-headed figure peering through a pipe telescope on a tripod. In-progress workshop piece.',
+    price: 300, img: 'IMG-20260420-WA0104.jpeg'
+  },
+  {
+    id: 8, tag: 'Mixed Set', name: 'Pot Holders Collection',
+    desc: 'Assorted rebar figures holding ceramic pots as planters. Bottle holders included. Various sizes.',
+    price: 200, img: 'IMG-20260420-WA0106.jpeg'
+  },
+  {
+    id: 9, tag: 'Bottle Holder', name: 'The Brandy Carriers',
+    desc: 'Two figures collaborating to carry a full bottle together. Welded bar connecting both bases.',
+    price: 400, img: 'IMG-20260420-WA0108.jpeg'
+  },
+  {
+    id: 10, tag: 'Trophy Figure', name: 'The Presenter',
+    desc: 'Rusted wire figure holding a flat-screen style plate. Great as a nameplate or award stand. R150.',
+    price: 150, img: 'IMG-20260420-WA0109.jpeg'
+  },
+  {
+    id: 11, tag: 'Bottle Holder', name: 'The Lean',
+    desc: 'A spring-and-bracket figure that holds a bottle in a gravity-defying diagonal tilt.',
+    price: 280, img: 'IMG-20260420-WA0112.jpg'
+  },
+  {
+    id: 12, tag: 'Bottle Holder', name: 'Black Edition Holder',
+    desc: 'Matte black rebar figure with curved arm cradle. Clean, painted finish. Minimalist elegance.',
+    price: 300, img: 'IMG-20260420-WA0113.jpg'
+  },
+  {
+    id: 13, tag: 'Pot Stand', name: 'The Potter',
+    desc: 'Screw-body figure cradling a ceramic pot. Painted black base. Includes small ceramic pot. R200.',
+    price: 200, img: 'IMG-20260420-WA0114.jpeg'
+  },
+  {
+    id: 14, tag: 'Abstract Figure', name: 'The Balance',
+    desc: 'Abstract figure holding two flat metal blades in a cross formation. Striking desk sculpture. R150.',
+    price: 150, img: 'IMG-20260420-WA0116.jpeg'
+  },
+  {
+    id: 15, tag: 'Pot Stand', name: 'The Keeper',
+    desc: 'Spring-bodied figure holding a round white ceramic planter. Painted black base, vibrant finish. R200.',
+    price: 200, img: 'IMG-20260420-WA0117.jpeg'
   }
+];
 
-  function showToast(msg) {
-    const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 3000);
+// CART STATE
+let cart = [];
+
+// RENDER PRODUCTS
+const grid = document.getElementById('productsGrid');
+products.forEach(p => {
+  const card = document.createElement('div');
+  card.className = 'product-card reveal';
+  card.innerHTML = `
+    <img class="product-img" src="${p.img}" alt="${p.name}" onerror="this.style.background='#1A1008';this.style.minHeight='200px'">
+    <div class="product-info">
+      <p class="product-tag">${p.tag}</p>
+      <h3 class="product-name">${p.name}</h3>
+      <p class="product-desc">${p.desc}</p>
+      <div class="product-footer">
+        <span class="product-price">R${p.price}</span>
+        <button class="add-btn" id="btn-${p.id}" onclick="addToCart(${p.id})">+ Add to Order</button>
+      </div>
+    </div>
+  `;
+  grid.appendChild(card);
+});
+
+// ADD TO CART
+function addToCart(id) {
+  const product = products.find(p => p.id === id);
+  const existing = cart.find(i => i.id === id);
+  if (existing) {
+    existing.qty++;
+  } else {
+    cart.push({ ...product, qty: 1 });
   }
+  updateCartUI();
+  const btn = document.getElementById('btn-' + id);
+  btn.textContent = 'Added ✓';
+  btn.classList.add('added');
+  showNotif(product.name + ' added to order');
+}
 
-  function submitForm() {
-    showToast('Enquiry sent! We\'ll be in touch shortly.');
-  }
+function removeFromCart(id) {
+  cart = cart.filter(i => i.id !== id);
+  updateCartUI();
+  renderModalCart();
+}
 
-  // Scroll reveal
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        // stagger siblings
-        const siblings = e.target.parentElement.querySelectorAll('.reveal');
-        let delay = 0;
-        siblings.forEach(s => {
-          if (!s.classList.contains('visible')) {
-            s.style.transitionDelay = delay + 'ms';
-          }
-          delay += 80;
-        });
-      }
-    });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+function getTotal() {
+  return cart.reduce((s, i) => s + i.price * i.qty, 0);
+}
 
-  // Nav cart button
-  document.getElementById('cartBtn').addEventListener('click', () => {
-    if (cartCount > 0) {
-      showToast(`${cartCount} item(s) in cart · Contact us to complete your order`);
-    } else {
-      showToast('Your cart is empty');
-    }
+function updateCartUI() {
+  const count = cart.reduce((s, i) => s + i.qty, 0);
+  document.getElementById('cartCount').textContent = count > 0 ? `(${count})` : '';
+  document.getElementById('cartBarCount').textContent = count;
+  document.getElementById('cartBarTotal').textContent = 'R' + getTotal();
+  const bar = document.getElementById('cartBar');
+  bar.classList.toggle('visible', count > 0);
+}
+
+// CHECKOUT
+function openCheckout() {
+  renderModalCart();
+  document.getElementById('checkoutModal').classList.add('open');
+}
+function closeCheckout() {
+  document.getElementById('checkoutModal').classList.remove('open');
+}
+
+function renderModalCart() {
+  const container = document.getElementById('modalCartItems');
+  container.innerHTML = '';
+  cart.forEach(item => {
+    const row = document.createElement('div');
+    row.className = 'cart-item';
+    row.innerHTML = `
+      <span class="cart-item-name">${item.name} ${item.qty > 1 ? 'x' + item.qty : ''}</span>
+      <div class="cart-item-right">
+        <span class="cart-item-price">R${item.price * item.qty}</span>
+        <button class="remove-item" onclick="removeFromCart(${item.id})">✕ Remove</button>
+      </div>
+    `;
+    container.appendChild(row);
   });
+  document.getElementById('modalCartTotal').textContent = 'Total: R' + getTotal();
+}
+
+function buildOrderMessage() {
+  const name = document.getElementById('orderName').value || 'Customer';
+  const phone = document.getElementById('orderPhone').value || 'not provided';
+  const delivery = document.getElementById('orderDelivery').value;
+  const notes = document.getElementById('orderNotes').value;
+  let msg = `Hi Iron Souls! 🔥\n\nNew Order from: ${name}\nContact: ${phone}\n\nItems:\n`;
+  cart.forEach(i => {
+    msg += `• ${i.name} x${i.qty} = R${i.price * i.qty}\n`;
+  });
+  msg += `\nTotal: R${getTotal()}\n`;
+  msg += `Delivery: ${delivery === 'delivery' ? 'Deliver to me (please quote)' : 'Collection in Stellenbosch'}\n`;
+  if (notes) msg += `\nNotes: ${notes}`;
+  return msg;
+}
+
+function placeOrder(method) {
+  if (cart.length === 0) { showNotif('Your cart is empty!'); return; }
+  const msg = encodeURIComponent(buildOrderMessage());
+  if (method === 'whatsapp') {
+    window.open('https://wa.me/27762159141?text=' + msg, '_blank');
+  } else {
+    window.open('sms:+27762159141?body=' + msg, '_blank');
+  }
+  showNotif('Opening ' + (method === 'whatsapp' ? 'WhatsApp' : 'SMS') + '...');
+}
+
+// CONTACT FORM
+function sendContactWA() {
+  const name = document.getElementById('cName').value || 'Someone';
+  const contact = document.getElementById('cContact').value || '';
+  const type = document.getElementById('cType').value || 'general enquiry';
+  const msg = document.getElementById('cMessage').value || '';
+  const text = encodeURIComponent(`Hi Iron Souls!\n\nName: ${name}\nContact: ${contact}\nInterest: ${type}\n\n${msg}`);
+  window.open('https://wa.me/27762159141?text=' + text, '_blank');
+}
+function sendContactSMS() {
+  const name = document.getElementById('cName').value || 'Someone';
+  const type = document.getElementById('cType').value || 'general enquiry';
+  const msg = document.getElementById('cMessage').value || '';
+  const text = encodeURIComponent(`Iron Souls enquiry from ${name} (${type}): ${msg}`);
+  window.open('sms:+27762159141?body=' + text, '_blank');
+}
+
+// NOTIFICATION
+function showNotif(text) {
+  const n = document.getElementById('notif');
+  n.textContent = text;
+  n.classList.add('show');
+  setTimeout(() => n.classList.remove('show'), 2500);
+}
+
+// SCROLL REVEAL
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Cart nav link
+document.getElementById('navCart').addEventListener('click', e => {
+  e.preventDefault();
+  if (cart.length > 0) openCheckout();
+});
 </script>
 </body>
 </html>
